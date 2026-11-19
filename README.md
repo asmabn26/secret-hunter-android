@@ -16,32 +16,25 @@ The project explores Android application security, vulnerability identification,
 
 ### Video Demo
 
-A video demonstration is available to showcase the Secret Hunter Android platform and its APK security analysis workflow.
-
-
+A video demonstration of **Secret Hunter Android** is available to showcase the platform's functionalities and Android APK security analysis workflow.
 
 https://github.com/user-attachments/assets/0308fa35-c075-4ebe-b18b-2bb7db6784e3
 
+The demonstration highlights:
 
-The demonstration highlights the platform's main features:
-
-- APK upload through the web interface.
-- Android application static analysis.
-- Detection of potentially exposed secrets and credentials.
+- Android APK upload and static security analysis.
+- Detection of exposed secrets and sensitive information.
 - Identification of API endpoints.
-- AndroidManifest.xml security inspection.
-- Security risk scoring.
-- Visualization of findings and security reports.
+- Android application security configuration analysis.
+- Security risk assessment and scoring.
+- Generation of security analysis reports.
 
-### Application Preview
+> **Note:** Secret Hunter Android is an academic cybersecurity project developed for educational purposes and authorized security assessments.
 
-Add screenshots to `docs/screenshots/` to showcase the interface.
 
-Example:
 
-```markdown
-![Secret Hunter Android Dashboard](docs/screenshots/dashboard.png)
-```
+
+
 
 ## Key Features
 
