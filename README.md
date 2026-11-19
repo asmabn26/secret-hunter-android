@@ -1,222 +1,467 @@
-# Secret Hunter - Android Security Analysis Tool
+# Secret Hunter Android — APK Security Analysis Platform
 
-A comprehensive security analysis tool for Android APK files that detects secrets, vulnerabilities, risky endpoints, and generates detailed security reports.
+**Android Application Static Security Analysis | Secret Detection | API Endpoint Discovery | Risk Assessment**
 
-## 🎯 Features
+## Overview
 
-- **APK Analysis**: Extract and analyze Android APK files
-- **Secret Detection**: Identify exposed secrets, API keys, and sensitive credentials
-- **Endpoint Scanning**: Detect and analyze API endpoints with risk assessment
-- **Manifest Analysis**: Extract and analyze AndroidManifest.xml
-- **Network Analysis**: Analyze network configurations and connections
-- **Risk Scoring**: Comprehensive risk assessment with scoring algorithm
-- **AI-Powered Analysis**: Advanced analysis using AI models
-- **Report Generation**: Generate detailed HTML reports with findings
-- **Web Dashboard**: Interactive React-based frontend for analysis results
-- **RESTful API**: Complete API for programmatic access
+Secret Hunter Android is an academic cybersecurity project designed to analyze Android APK files and identify potential security weaknesses through static analysis.
 
-## 📋 Tech Stack
+The platform combines a Python Flask backend with a React-based web dashboard to inspect Android applications, detect potentially exposed secrets, identify suspicious API endpoints, analyze application configurations, and generate security assessment reports.
 
-### Backend
-- **Framework**: Flask (Python)
-- **Analysis Tools**: APK extraction, manifest parsing, network analysis
-- **Database**: File-based storage system
-- **API**: RESTful endpoints for analysis, reports, and health checks
-- **AI**: Integration with AI models for enhanced analysis
+The project explores Android application security, vulnerability identification, automated security analysis, and DevSecOps principles.
 
-### Frontend
-- **Framework**: React with Vite
-- **Styling**: Tailwind CSS + PostCSS
-- **Components**: Modular component architecture
-- **Features**: Dashboard, file upload, analysis visualization, report generation
+> **Disclaimer:** Secret Hunter Android is an educational security analysis tool. It is intended exclusively for authorized assessments and research.
 
-### DevOps
-- **Containerization**: Docker & Docker Compose
-- **Environment Management**: Multi-environment support
+## Project Demonstration
 
-## 📁 Project Structure
+### Video Demo
 
+A video demonstration is available to showcase the Secret Hunter Android platform and its APK security analysis workflow.
+
+
+
+https://github.com/user-attachments/assets/0308fa35-c075-4ebe-b18b-2bb7db6784e3
+
+
+The demonstration highlights the platform's main features:
+
+- APK upload through the web interface.
+- Android application static analysis.
+- Detection of potentially exposed secrets and credentials.
+- Identification of API endpoints.
+- AndroidManifest.xml security inspection.
+- Security risk scoring.
+- Visualization of findings and security reports.
+
+### Application Preview
+
+Add screenshots to `docs/screenshots/` to showcase the interface.
+
+Example:
+
+```markdown
+![Secret Hunter Android Dashboard](docs/screenshots/dashboard.png)
 ```
+
+## Key Features
+
+### 1. Android APK Static Analysis
+
+- APK file extraction and inspection.
+- Analysis of application resources and configuration files.
+- Identification of security-relevant information.
+- Extraction of artifacts for further security analysis.
+
+### 2. Sensitive Information Detection
+
+The secret scanning module searches for patterns associated with potentially exposed sensitive information, including:
+
+- API keys.
+- Authentication tokens.
+- Hardcoded credentials.
+- Other potentially sensitive strings.
+
+Detection rules are configured through:
+
+`backend/rules/secret_patterns.json`
+
+### 3. API Endpoint Discovery
+
+- Extraction of potential API endpoints.
+- Identification of URLs and network-related references.
+- Analysis of suspicious endpoint patterns.
+- Classification of findings based on security indicators.
+
+Endpoint detection rules are stored in:
+
+`backend/rules/endpoint_patterns.json`
+
+### 4. Android Manifest Security Analysis
+
+The manifest analysis module examines Android application configuration information.
+
+Areas of analysis include:
+
+- Application permissions.
+- Security-relevant manifest attributes.
+- Potentially risky application configurations.
+- Android component exposure indicators.
+
+### 5. Network Security Analysis
+
+- Inspection of network-related configuration indicators.
+- Identification of potentially insecure communication settings.
+- Analysis of network references extracted from application resources.
+
+### 6. Risk Scoring
+
+The platform includes a risk scoring module designed to consolidate security findings into an overall assessment.
+
+The scoring system uses configured risk rules to help prioritize detected issues.
+
+Risk rules are defined in:
+
+`backend/rules/risk_rules.json`
+
+### 7. AI-Assisted Analysis Components
+
+The backend contains AI-related analysis modules:
+
+- `ai_analyzer.py`
+- `ai_model_service.py`
+- `ai_service.py`
+
+These components provide a foundation for enhanced security analysis.
+
+AI-related capabilities should be considered experimental until their model integration and behavior have been validated.
+
+### 8. Security Report Generation
+
+- Generation of structured security findings.
+- HTML report generation.
+- Risk assessment summaries.
+- Security recommendations.
+- Report visualization through the application interface.
+
+### 9. Interactive Web Dashboard
+
+The frontend is built using React and Vite.
+
+It provides a user interface for:
+
+- Uploading APK files.
+- Initiating analysis.
+- Viewing detected findings.
+- Exploring risk assessment results.
+- Accessing security reports.
+
+## Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Backend | Python, Flask |
+| Frontend | React, JavaScript, Vite |
+| Styling | Tailwind CSS, PostCSS |
+| Android Analysis | APK Extraction, Manifest Inspection |
+| Security Detection | Pattern Matching, JSON Rules |
+| API | RESTful API |
+| Reporting | HTML Report Generation |
+| Storage | File-Based Storage |
+| Containerization | Docker, Docker Compose |
+| Testing | Python Unit Tests |
+
+## System Architecture
+
+```text
+                  USER
+                    |
+                    v
+          React Web Dashboard
+             (Vite Frontend)
+                    |
+                    v
+             Flask REST API
+                    |
+                    v
+            Analysis Workflow
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
+     APK Extraction       Job Management
+          |
+          v
+   +------+----------------------+
+   |             |              |
+   v             v              v
+Secret       Endpoint       Manifest
+Scanner      Scanner        Analyzer
+   |             |              |
+   +-------------+--------------+
+                 |
+                 v
+          Network Analysis
+                 |
+                 v
+            Risk Scoring
+                 |
+                 v
+         Analysis Results
+                 |
+                 v
+         HTML Report Generator
+                 |
+                 v
+          React Dashboard
+```
+
+## Project Structure
+
+```text
 secret-hunter-android/
-├── backend/                 # Flask backend application
-│   ├── api/                # API routes (analysis, reports, health)
-│   ├── core/               # Core utilities (config, logging, exceptions)
-│   ├── jobs/               # Job management system
-│   ├── reports/            # Report generation
-│   ├── rules/              # Security rules and patterns (JSON)
-│   ├── scanners/           # Security scanners
+|
+├── backend/
+│   ├── api/
+│   │   ├── routes_analysis.py
+│   │   ├── routes_reports.py
+│   │   └── routes_health.py
+│   │
+│   ├── scanners/
 │   │   ├── apk_extractor.py
 │   │   ├── secret_scanner.py
 │   │   ├── endpoint_scanner.py
 │   │   ├── manifest_analyzer.py
+│   │   ├── network_analyzer.py
 │   │   └── risk_scoring.py
-│   ├── schemas/            # Data validation schemas
-│   ├── services/           # Business logic services
-│   ├── storage/            # Data persistence
-│   └── tests/              # Unit tests
-├── frontend/               # React + Vite application
+│   │
+│   ├── rules/
+│   │   ├── secret_patterns.json
+│   │   ├── endpoint_patterns.json
+│   │   └── risk_rules.json
+│   │
+│   ├── reports/
+│   │   ├── report_generator.py
+│   │   └── templates/
+│   │
+│   ├── services/
+│   ├── schemas/
+│   ├── storage/
+│   ├── jobs/
+│   ├── core/
+│   ├── tests/
+│   ├── ai_analyzer.py
+│   ├── app.py
+│   └── requirements.txt
+│
+├── frontend/
 │   ├── src/
-│   │   ├── components/     # Reusable React components
-│   │   ├── pages/          # Page components
-│   │   ├── api/            # API client
-│   │   └── utils/          # Utility functions
-│   └── public/
-├── docs/                   # Documentation
-├── scripts/                # Setup and utility scripts
-├── uploads/                # Temporary upload directory
-├── logs/                   # Application logs
-└── reports/                # Generated reports
+│   ├── public/
+│   └── package.json
+│
+├── docs/
+├── scripts/
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+└── README.md
 ```
 
-## 🚀 Getting Started
+## Installation and Setup
 
 ### Prerequisites
-- Python 3.8+
-- Node.js 16+
-- Docker & Docker Compose (optional)
-- APKTool (for APK extraction)
 
-### Installation
+- Python 3.8 or newer
+- Node.js 16 or newer
+- npm
+- Git
+- APKTool for APK extraction workflows, where required
+- Docker and Docker Compose (optional)
 
-#### 1. Backend Setup
+### Step 1 — Clone the Repository
 
 ```bash
+git clone https://github.com/YOUR_USERNAME/secret-hunter-android.git
+cd secret-hunter-android
+```
+
+Replace `YOUR_USERNAME` with your GitHub username.
+
+### Step 2 — Set Up the Backend
+
+On Windows:
+
+```powershell
 cd backend
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-#### 2. Frontend Setup
+The backend requirements file lists Flask, Flask-CORS, and Werkzeug.
+
+### Step 3 — Start the Backend
+
+From the `backend` directory:
+
+```bash
+python app.py
+```
+
+The expected local backend address is:
+
+`http://localhost:5000`
+
+### Step 4 — Set Up the Frontend
+
+Open a second terminal and navigate to the frontend directory:
 
 ```bash
 cd frontend
 npm install
 ```
 
-#### 3. Configuration
+Start the development server:
 
-Update configuration in `backend/core/config.py`:
-```python
-UPLOAD_FOLDER = "uploads"
-RULES_FOLDER = "rules"
-MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
-```
-
-### Running Locally
-
-#### Start Backend
-```powershell
-# Using PowerShell script
-./scripts/run_backend.ps1
-
-# Or manually
-cd backend
-python app.py
-```
-
-Backend runs on `http://localhost:5000`
-
-#### Start Frontend
-```powershell
-# Using PowerShell script
-./scripts/run_frontend.ps1
-
-# Or manually
-cd frontend
+```bash
 npm run dev
 ```
 
-Frontend runs on `http://localhost:5173`
+The expected frontend address is:
 
-### Running with Docker
+`http://localhost:5173`
 
-```bash
-docker-compose up --build
-```
+Open the application in your browser.
 
-This will start:
-- Backend API: `http://localhost:5000`
-- Frontend: `http://localhost:3000`
+### Step 5 — Analyze an APK
 
-## 📖 API Endpoints
+1. Open the Secret Hunter Android web interface.
+2. Upload an APK file that you own or are authorized to analyze.
+3. Start the security analysis.
+4. Review detected secrets and endpoints.
+5. Inspect manifest and network security findings.
+6. Review the risk assessment.
+7. Generate or view the available security report.
 
-### Analysis
-- `POST /api/analysis/upload` - Upload and analyze APK file
-- `GET /api/analysis/<analysis_id>` - Get analysis results
-- `POST /api/analysis/advanced` - Advanced analysis with AI
+## Docker Support
 
-### Reports
-- `GET /api/reports/<analysis_id>` - Generate report
-- `POST /api/reports/export` - Export report as PDF/HTML
+The repository includes a `docker-compose.yml` file.
 
-### Health
-- `GET /api/health` - Health check endpoint
+However, the supplied Compose file is currently empty, so Docker deployment requires additional configuration.
 
-## 🔍 Scanning Rules
+A future Docker configuration can provide separate services for:
 
-Security rules are defined in `backend/rules/`:
-- `secret_patterns.json` - Patterns for detecting secrets
-- `endpoint_patterns.json` - API endpoint patterns
-- `risk_rules.json` - Risk assessment rules
+- Flask backend.
+- React frontend.
+- Shared configuration and networking.
 
-## 📊 Analysis Results
+Docker deployment should be tested before being considered operational.
 
-Analysis results include:
-- **Secrets Found**: Detected API keys, tokens, credentials
-- **Endpoints**: Discovered API endpoints with risk levels
-- **Permissions**: AndroidManifest permissions analysis
-- **Network**: Network configuration analysis
-- **Risk Score**: Overall security risk assessment
-- **Recommendations**: Security improvement suggestions
+## API Overview
 
-## 🧪 Testing
+The backend contains API modules for analysis and reporting.
 
-Run backend tests:
+The project's documented API design includes the following routes:
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/analysis/upload` | Upload and analyze an APK |
+| GET | `/api/analysis/<analysis_id>` | Retrieve analysis results |
+| POST | `/api/analysis/advanced` | Advanced analysis workflow |
+| GET | `/api/reports/<analysis_id>` | Retrieve a report |
+| POST | `/api/reports/export` | Export analysis results |
+
+The exact behavior and availability of each endpoint should be verified against the running backend.
+
+## Detection Rules
+
+The platform uses configurable JSON-based rules.
+
+### Secret Detection
+
+`backend/rules/secret_patterns.json`
+
+Contains patterns for identifying potentially sensitive information.
+
+### Endpoint Detection
+
+`backend/rules/endpoint_patterns.json`
+
+Defines patterns for discovering and assessing application endpoints.
+
+### Risk Assessment
+
+`backend/rules/risk_rules.json`
+
+Contains rules used to support the security risk assessment.
+
+## Testing
+
+The repository contains Python test modules, including:
+
+- `test_endpoint_scanner.py`
+- `test_risk_scoring.py`
+- `test_secret_scanner.py`
+
+To run available backend tests:
+
 ```bash
 cd backend
 python -m pytest tests/
 ```
 
-## 📝 Configuration Files
+Install pytest separately if it is not already available:
 
-- `backend/core/config.py` - Application configuration
-- `backend/rules/*.json` - Security scanning rules
-- `frontend/vite.config.js` - Frontend build configuration
-- `docker-compose.yml` - Docker services configuration
+```bash
+pip install pytest
+```
 
-## 🔐 Security Considerations
+Some test files are currently placeholders. Test coverage and execution results should be validated before claiming full automated testing.
 
-- Sensitive data is masked in reports
-- Uploaded files are stored temporarily
-- Analysis results are sanitized
-- Configure appropriate access controls
-- Use HTTPS in production
+## Security Considerations
 
-## 📄 License
+This project processes potentially untrusted Android application packages.
 
-This project is provided as-is for security research and educational purposes.
+Important precautions include:
 
-## 🤝 Contributing
+- Analyze only authorized APK files.
+- Validate uploaded file types and sizes.
+- Restrict access to temporary files.
+- Avoid exposing detected secrets in public logs or reports.
+- Apply authentication and authorization before public deployment.
+- Isolate APK processing from sensitive host resources.
+- Use HTTPS when deploying outside a local development environment.
+- Apply appropriate file retention and cleanup policies.
+- Review all findings manually to reduce false positives.
 
-Contributions are welcome! Please follow the existing code structure and testing practices.
+Static analysis cannot guarantee that an application is secure or identify every vulnerability.
 
-## 📞 Support
+## Limitations
 
-For issues and questions:
-1. Check the [documentation](docs/)
-2. Review existing issues
-3. Create a new issue with detailed information
+- The project focuses primarily on static analysis.
+- It does not replace dynamic application security testing.
+- Pattern-based detection can produce false positives and false negatives.
+- Some AI-related components require further validation.
+- Docker deployment configuration is incomplete.
+- Some tests and support modules are placeholders.
+- Production deployment requires additional security hardening.
 
-## 🗺️ Roadmap
+## Future Improvements
 
-- [ ] Cloud deployment support
-- [ ] Mobile app integration
-- [ ] Real-time scanning
-- [ ] Advanced ML-based detection
-- [ ] Community rule sharing
-- [ ] API rate limiting
-- [ ] User authentication system
+- Complete Docker and Docker Compose configuration.
+- Integrate automated CI/CD pipelines.
+- Improve Android manifest parsing.
+- Expand secret detection rules.
+- Add dynamic analysis capabilities.
+- Integrate vulnerability intelligence sources.
+- Implement role-based access control.
+- Add API rate limiting.
+- Improve automated test coverage.
+- Introduce more advanced ML-based detection.
+- Support additional report formats.
+- Add security audit logging.
+
+## Skills Demonstrated
+
+- Android application security analysis.
+- Static Application Security Testing (SAST).
+- Sensitive information detection.
+- API endpoint discovery.
+- Security configuration analysis.
+- Risk assessment and vulnerability prioritization.
+- Python backend development.
+- REST API architecture.
+- React frontend development.
+- Security reporting.
+- DevSecOps-oriented application design.
+
+## Author
+
+**Asma Bensassi Nour**
+
+Cyberdefense Engineering Student — ENSA Marrakech
+
+Academic cybersecurity project focused on Android application security, static analysis, and automated vulnerability detection.
 
 ---
 
-**Last Updated**: May 2026
-
+**Secret Hunter Android — Analyze. Detect. Assess. Secure.**
